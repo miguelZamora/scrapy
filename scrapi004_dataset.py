@@ -28,10 +28,19 @@ if response.status_code == 200:
             # Extraer contenido principal y buscar los datos adicionales
             contenido   = item.find('div', class_='poly-card__content')
 
- 
+            
+
             if contenido:
                 # Extraer el tipo de arriendo
+            
+
+                units = contenido.select_one('div.poly-card__content span.poly-component__available-units')
+                #units   = contenido.find('span', class_='poly-component__available-units')
+                print("units", units ) 
+
+
                 tipo_arriendo = contenido.find('span', class_='poly-component__headline')
+
                 # Extraer las referencias de dirección
                 direccion = contenido.find('a', class_='poly-component__title')
                 # Extraer la lista de atributos (habitaciones y metros cuadrados)
@@ -48,15 +57,12 @@ if response.status_code == 200:
                 print("Imagen_URL:", imagen_src)
 
                 ubicacion   = item.find('span', class_='poly-component__location')
+
                 print("Ubicación:", ubicacion.text.strip() if ubicacion else "No disponible")
-
-
-                units   = contenido.find('span', class_='poly-component__available-units')
                 
-                if units:
-                    print("Atributos:", ", ".join(attr.text.strip() for attr in atributos.find_all('li')) if atributos else "No disponible")
+                print("Atributos:", ", ".join(attr.text.strip() for attr in atributos.find_all('li')) if atributos else "No disponible")
                     
-                    print("units", ", ".join(attr.text.strip() for attr in atributos.find_all('li')) if atributos else "No disponible") 
+                    
 
                 cant_visitas =   contenido.find('span', class_='poly-component__visit-request')
 
