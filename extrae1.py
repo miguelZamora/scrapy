@@ -13,9 +13,6 @@ def get_urls(url):
     #soup = BeautifulSoup(html, 'html.parser')
     soup = BeautifulSoup(response.content, "html.parser")
 
-
-
-
     # Extraer los enlaces de paginación
     pagination_links = soup.find_all('a', class_='andes-pagination__link')
     page_urls = []
